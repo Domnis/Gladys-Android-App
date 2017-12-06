@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.BIND_VOICE_INTERACTION" />
 
     <application
         android:name="com.orm.SugarApp"
@@ -57,62 +56,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name="com.gladysinc.gladys.voice_recognition.SettingsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".voice_recognition.AssistProxyActivity"
-            android:label="Test Assist Proxy"
-            android:theme="@style/AppTheme"
+        <activity android:name=".voice_recognition.AssistActivity"
             android:excludeFromRecents="true"
-            android:noHistory="true"
-            android:taskAffinity="">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.ASSIST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-        <activity android:name=".voice_recognition.VoiceInteractionMain" android:label="Voice Interaction"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".voice_recognition.TestInteractionActivity" android:label="Voice Interaction Target"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="com.android.intent.action.MANAGE_VOICE_KEYPHRASES" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <meta-data
+                android:name="com.android.systemui.action_assist_icon"
+                android:resource="@mipmap/ic_launcher"/>
         </activity>
 
-        <!-- Services part -->
-        <service android:name=".voice_recognition.MainInteractionService"
-            android:label="Gladys Voice Interaction Service"
-            android:permission="android.permission.BIND_VOICE_INTERACTION"
-            android:process=":interactor">
-            <meta-data android:name="android.voice_interaction"
-                android:resource="@xml/interaction_service" />
-        </service>
-        <service android:name=".voice_recognition.MainInteractionSessionService"
-            android:permission="android.permission.BIND_VOICE_INTERACTION"
-            android:process=":session">
-        </service>
-        <service android:name=".voice_recognition.MainRecognitionService"
-            android:label="Gladys Voice Recognition Service">
-            <intent-filter>
-                <action android:name="android.speech.RecognitionService" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="android.speech" android:resource="@xml/recognition_service" />
-        </service>
     </application>
 
 </manifest>
